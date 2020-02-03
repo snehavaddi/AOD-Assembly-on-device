@@ -1,0 +1,136 @@
+.mainTile {
+    margin: 0px auto;
+    width: 100% !important;
+    background-color: #F0AB00;
+    background-image: url("../images/4.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:     cover;  
+    max-width: 400px;
+    display: block;
+}
+.sapMLIB.whitebox[data-white]{
+	background-color: #F0AB00;
+}
+.sapMNLB.whitebox[data-white]{
+	background-color: #F0AB00;
+}
+.sapMNLI.whitebox[data-white]{
+	background-color: #F0AB00;
+}
+.otherTile {
+    margin: 10px auto;
+    width: 100% !important;
+    background-color: #5CB85C;
+    background-image: url("../images/1.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    max-width: 400px;
+    display: block;
+}
+
+.thirdTile {
+    background-color: #F0AD4E;
+    background-image: url("../images/2.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.chart {
+    width: 100% !important;
+    height: 360px !important;
+}
+
+@media (min-width: 500px) {
+    .mainTile {
+        margin: auto !important;
+        margin-top: 2% !important;
+    }
+    .otherTile {
+        margin: auto !important;
+        margin-top: 2% !important;
+    }
+}
+
+.newsTile {
+    width: 100% !important;
+}
+
+.vlay {
+    width: 100% !important;
+}
+
+.mainPage {
+    background: -moz-linear-gradient(top, rgba(30, 87, 153, 1) 0%, rgba(125, 185, 232, 0) 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(30, 87, 153, 1) 0%, rgba(125, 185, 232, 0) 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(30, 87, 153, 1) 0%, rgba(125, 185, 232, 0) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#1e5799', endColorstr='#007db9e8', GradientType=0);
+}
+
+
+/* assemblyoverview page CSS */
+
+.label {
+    margin-left: 5% !important;
+    font-size: 1.5rem !important;
+}
+
+
+/* holine Page CSS  */
+
+.hotlineCalender {
+    height: 280px !important;
+    margin-top: 0px !important;
+}
+
+.phaseBox {
+    margin: auto;
+    width: 90% !important;
+    background-color: #CCCCCC;
+    margin-top: 10px;
+    padding: 10px;
+    border: black;
+    border-style: solid;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.phasePanel {
+    margin-top: 10px;
+    background: #008FD3;
+}
+
+.phaseText {
+    color: white;
+    font-style: italic;
+}
+
+.home {
+    background-image: url('../images/bg.png');
+    webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.labels {
+	font-style: italic;
+}
+.details {
+	 font-weight: bold;
+}
+.projectTitle {
+    font-style: italic;
+    font-weight: bold;
+    font-size: large;
+    margin: 10px 0px 10px 5px;
+}
+.noPadding>div {
+	padding :  0px !important;
+}
+.vboxMarginTop {
+	margin-top : 25px;
+}
