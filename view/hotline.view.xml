@@ -1,0 +1,197 @@
+<mvc:View xmlns:l="sap.ui.layout" xmlns:u="sap.ui.unified" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:core="sap.ui.core" controllerName="Cloud.controller.hotline" class="viewPadding">
+	<Page showHeader="false" showNavButton="false" class="home" showFooter="false">
+		<content>
+			<Page id="sideContentContainer" showHeader="true" showNavButton="false" class="main" backgroundDesign="Transparent">
+				<headerContent>
+					<Bar>
+						<contentLeft>
+							<Button type="Transparent" press="onNavBack" icon="sap-icon://nav-back"/>
+						</contentLeft>
+						<contentMiddle>
+							<Title text="{i18n>hotlineTitle}"/>
+						</contentMiddle>
+						<contentRight>
+							<Button type="Transparent" press="handleToggleClick" id="toggleButton" icon="sap-icon://menu2" visible="{= ${device>/system/phone} }"/>
+						</contentRight>
+					</Bar>
+				</headerContent>
+				<l:DynamicSideContent id="DynamicSideContent" class="sapUiDSCExplored sapUiContentPadding" sideContentFallDown="BelowM"
+					containerQuery="true" breakpointChanged="updateToggleButtonState" showSideContent="false">
+					<l:mainContent class="main">
+						<VBox>
+							<SegmentedButton selectedKey="{hotlineModel>/key}" width="100%" select="onSelectType">
+								<items>
+									<SegmentedButtonItem text="{i18n>myView}" key="myView"/>
+									<SegmentedButtonItem text="{i18n>todayView}" key="todayView"/>
+									<SegmentedButtonItem text="{i18n>qtrView}" key="qtrView"/>
+								</items>
+							</SegmentedButton>
+							<Panel visible="{= ${hotlineModel>/key} === 'myView' }" width="100%" class="noPadding">
+								<Toolbar>
+									<StepInput width="100px" min="1" max="4" step="1" value="{date>/qtr}"></StepInput>
+									<ToolbarSpacer/>
+									<StepInput value="{date>/year}" min="2017" max="2050" step="1" width="150px"/>
+									<ToolbarSpacer/>
+									<Button icon="sap-icon://arrow-right" type="Emphasized" iconFirst="false" press="getMyHotlines"/>
+								</Toolbar>
+								<content>
+									<l:VerticalLayout class="vlay">
+										<l:content>
+											<IconTabBar expanded="{device>/isNoPhone}" class="sapUiResponsiveContentPadding">
+												<items>
+													<IconTabFilter text="Cloud">
+														<VBox>
+															<List items="{ path: 'my>/results', sorter: { path: 'HOTLINE', descending: false, group: true }, groupHeaderFactory: '.getGroupHeader' }">
+																<StandardListItem
+																	title="{path : 'my>FROMDATE',type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'EEEE MMMM dd, YYYY' ,source :'yyyymmdd'}}"
+																	description="CW {my>CW}" icon="" iconDensityAware="false" iconInset="false"/>
+															</List>
+														</VBox>
+													</IconTabFilter>
+													<IconTabFilter text="BYD">
+														<VBox>
+															<List items="{ path: 'myBYD>/results', sorter: { path: 'HOTLINE', descending: false, group: true }, groupHeaderFactory: '.getGroupHeader' }">
+																<StandardListItem
+																	title="{path : 'myBYD>FROMDATE',type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'EEEE MMMM dd, YYYY' ,source :'yyyymmdd'}}"
+																	description="CW {myBYD>CW}" icon="" iconDensityAware="false" iconInset="false"/>
+															</List>
+														</VBox>
+													</IconTabFilter>
+												</items>
+											</IconTabBar>
+										</l:content>
+									</l:VerticalLayout>
+								</content>
+							</Panel>
+							<Panel visible="{= ${hotlineModel>/key} === 'todayView' }">
+								<content>
+									<l:VerticalLayout class="vlay">
+										<l:content>
+											<IconTabBar id="idIconTabBarNoIcons" expanded="{device>/isNoPhone}" class="sapUiResponsiveContentPadding">
+												<items>
+													<IconTabFilter text="Cloud">
+														<VBox visible="{= ${hotlineModel>/showTodayList} === '1' }">
+															<StandardListItem title="{today>/0/HOTLINER_IN_BLR}" description="{i18n>primary}" icon="{imageModel>/path}/images/india.png"
+																iconDensityAware="false" iconInset="false"/>
+															<StandardListItem title="{today>/0/BLR_BACKUP}" description="{i18n>backup}" icon="{imageModel>/path}/images/india.png"
+																iconDensityAware="false" iconInset="false"/>
+															<StandardListItem title="{today>/0/HOTLINER_IN_ROT}" description="{i18n>primary}" icon="{imageModel>/path}/images/germany.png"
+																iconDensityAware="false" iconInset="false"/>
+															<StandardListItem title="{today>/0/ROT_BACKUP}" description="{i18n>backup}" icon="{imageModel>/path}/images/germany.png"
+																iconDensityAware="false" iconInset="false"/>
+															<StandardListItem title="{today>/0/HOTLINER_IN_CAN}" description="{i18n>primary}" icon="{imageModel>/path}/images/canada.png"
+																iconDensityAware="false" iconInset="false"/>
+															<StandardListItem title="{today>/0/HOTLINER_CAN_BACK}" description="{i18n>backup}" icon="{imageModel>/path}/images/canada.png"
+																iconDensityAware="false" iconInset="false"/>
+														</VBox>
+														<VBox visible="{= ${hotlineModel>/showTodayList} === '0' }">
+															<StandardListItem title="{i18n>weekend}"/>
+														</VBox>
+													</IconTabFilter>
+													<IconTabFilter text="BYD">
+														<VBox visible="{= ${hotlineModel>/showTodayList} === '1' }">
+															<StandardListItem title="{todayBYD>/0/HOTLINER_IN_BLR}" description="{i18n>primary}" icon="{imageModel>/path}/images/india.png"
+																iconDensityAware="false" iconInset="false"/>
+															<StandardListItem title="{todayBYD>/0/BLR_BACKUP}" description="{i18n>backup}" icon="{imageModel>/path}/images/india.png"
+																iconDensityAware="false" iconInset="false"/>
+															<StandardListItem title="{todayBYD>/0/HOTLINER_IN_ROT}" description="{i18n>primary}" icon="{imageModel>/path}/images/germany.png"
+																iconDensityAware="false" iconInset="false"/>
+															<StandardListItem title="{todayBYD>/0/ROT_BACKUP}" description="{i18n>backup}" icon="{imageModel>/path}/images/germany.png"
+																iconDensityAware="false" iconInset="false"/>
+															<StandardListItem title="{todayBYD>/0/HOTLINER_IN_CAN}" description="{i18n>primary}" icon="{imageModel>/path}/images/canada.png"
+																iconDensityAware="false" iconInset="false"/>
+															<StandardListItem title="{todayBYD>/0/HOTLINER_CAN_BACK}" description="{i18n>backup}" icon="{imageModel>/path}/images/canada.png"
+																iconDensityAware="false" iconInset="false"/>
+														</VBox>
+														<VBox visible="{= ${hotlineModel>/showTodayList} === '0' }">
+															<StandardListItem title="{i18n>weekend}"/>
+														</VBox>
+													</IconTabFilter>
+												</items>
+											</IconTabBar>
+										</l:content>
+									</l:VerticalLayout>
+								</content>
+							</Panel>
+							<Panel visible="{= ${hotlineModel>/key} === 'qtrView' }" class="noPadding">
+								<SegmentedButton selectedKey="{hotlineModel>/subKey}" width="100%" select="onSelectQuarter">
+									<items>
+										<SegmentedButtonItem text="{i18n>calendarView}" key="calendarView"/>
+										<!--<SegmentedButtonItem text="{i18n>listView}" key="listView"/>-->
+									</items>
+								</SegmentedButton>
+								<Panel visible="{= ${hotlineModel>/subKey} === 'calendarView' }" class="noPadding">
+									<u:Calendar id="calendar" select="handleCalendarSelect" width="100%"/>
+									<content>
+										<l:VerticalLayout class="vlay">
+											<l:content>
+												<IconTabBar  expanded="{device>/isNoPhone}" class="sapUiResponsiveContentPadding">
+													<items>
+														<IconTabFilter text="Cloud">
+															<VBox visible="{= ${hotlineModel>/weekDay} === '1' }">
+																<StandardListItem title="{cal>/0/HOTLINER_IN_BLR} / {cal>/0/BLR_BACKUP}" description="{i18n>primary} / {i18n>backup}"
+																	icon="{imageModel>/path}/images/india.png" iconDensityAware="false" iconInset="false"/>
+																<StandardListItem title="{cal>/0/HOTLINER_IN_ROT} / {cal>/0/ROT_BACKUP}" description="{i18n>primary} / {i18n>backup}"
+																	icon="{imageModel>/path}/images/germany.png" iconDensityAware="false" iconInset="false"/>
+																<StandardListItem title="{cal>/0/HOTLINER_IN_CAN} / {cal>/0/HOTLINER_CAN_BACK}" description="{i18n>primary} / {i18n>backup}"
+																	icon="{imageModel>/path}/images/canada.png" iconDensityAware="false" iconInset="false"/>
+															</VBox>
+															<VBox visible="{= ${hotlineModel>/weekDay} === '0' }">
+																<StandardListItem title="{i18n>weekend}"/>
+															</VBox>
+														</IconTabFilter>
+														<IconTabFilter text="BYD">
+															<VBox visible="{= ${hotlineModel>/weekDay} === '1' }">
+																<StandardListItem title="{calBYD>/0/HOTLINER_IN_BLR} / {calBYD>/0/BLR_BACKUP}" description="{i18n>primary} / {i18n>backup}"
+																	icon="{imageModel>/path}/images/india.png" iconDensityAware="false" iconInset="false"/>
+																<StandardListItem title="{calBYD>/0/HOTLINER_IN_ROT} / {calBYD>/0/ROT_BACKUP}" description="{i18n>primary} / {i18n>backup}"
+																	icon="{imageModel>/path}/images/germany.png" iconDensityAware="false" iconInset="false"/>
+																<StandardListItem title="{calBYD>/0/HOTLINER_IN_CAN} / {calBYD>/0/HOTLINER_CAN_BACK}" description="{i18n>primary} / {i18n>backup}"
+																	icon="{imageModel>/path}/images/canada.png" iconDensityAware="false" iconInset="false"/>
+															</VBox>
+															<VBox visible="{= ${hotlineModel>/weekDay} === '0' }">
+																<StandardListItem title="{i18n>weekend}"/>
+															</VBox>
+														</IconTabFilter>
+													</items>
+												</IconTabBar>
+											</l:content>
+										</l:VerticalLayout>
+									</content>
+								</Panel>
+								<!--<Panel visible="{= ${hotlineModel>/subKey} === 'listView' }">-->
+								<!--	<Toolbar>-->
+								<!--	<StepInput width="100px" min="1" max="4" step="1" value="{date>/qtr}"></StepInput>-->
+								<!--	<ToolbarSpacer/>-->
+								<!--	<StepInput value="{date>/year}" min="2017" max="2050" step="1" width="150px"/>-->
+								<!--	<ToolbarSpacer/>-->
+								<!--	<Button icon="sap-icon://arrow-right" type="Emphasized" iconFirst="false" press="getQuarterlyHotlines"/>-->
+								<!--</Toolbar>-->
+								<!--</Panel>-->
+							</Panel>
+						</VBox>
+					</l:mainContent>
+					<l:sideContent class="side">
+						<mvc:XMLView viewName="Cloud.view.SideContent" visible="{= ${device>/system/phone} }"/>
+					</l:sideContent>
+				</l:DynamicSideContent>
+			</Page>
+		</content>
+		<footer>
+			<Bar visible="{= !${device>/system/phone} }">
+				<contentLeft>
+					<Button class="btn" type="Emphasized" text="{i18n>homeTitle}" width="auto" icon="sap-icon://home" press="goHome"/>
+				</contentLeft>
+				<contentMiddle>
+					<Button id="notifBtn" class="btn" type="Emphasized" text="{i18n>notifyPageTitle} ({notifsCount>/count})" width="auto"
+						icon="sap-icon://notification-2" press="onPressNotifications"/>
+				</contentMiddle>
+				<contentRight>
+					<Button class="btn" type="Transparent" text="{i18n>about}" width="auto" press="openAbout"/>
+					<Button class="btn" type="Transparent" text="{i18n>help}" width="auto" press="openHelp"/>
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>

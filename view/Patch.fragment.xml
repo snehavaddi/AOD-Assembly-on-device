@@ -1,0 +1,33 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" class="sapUiSizeCompact">
+	<Dialog showHeader="false" stretch="true">
+	<Table inset="false" items="{ path: '/results', sorter: { path: 'GroupId' } }" width="auto">
+		<columns>
+			<Column width="auto">
+				<Text text="{/type} Request"/>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" width="auto">
+				<Text text="SPS Name"/>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" hAlign="End" width="auto">
+				<Text text="Product Name"/>
+			</Column>
+			<Column hAlign="End" minScreenWidth="Tablet" demandPopin="true" width="auto">
+				<Text text="Hotfix Id"/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<ObjectIdentifier title="{EpRequestId}" text="Group Id {GroupId}"/>
+					<Text text="{SpsName}"/>
+					<Text text="{ProdVersName}"/>
+					<Text text="{HotfixId}"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+	<endButton>
+		<Button text="{i18n>close}" press="closePatchDetails"/>
+	</endButton>
+	</Dialog>
+</core:FragmentDefinition>

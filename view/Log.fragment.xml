@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Dialog title="Details" icon="sap-icon://form">
+		<content>
+			<List headerText="Log" items="{ path: 'logDetails>/results' }">
+				<items>
+					<StandardListItem title="{logDetails>Line}"/>
+				</items>
+			</List>
+		</content>
+		<endButton>
+			<Button press="closeLogDialog" text="Close" tooltip="{/ItemShortText}"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

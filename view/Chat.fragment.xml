@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" class="sapUiSizeCompact">
+	<Dialog title="chat" type="Message" id="chatbox">
+		<content>
+			<List showSeparators="Inner" items="{myView>/results}">
+				<FeedListItem sender="{myView>UserFrom}" icon="test-resources/sap/m/images/dronning_victoria.jpg" senderPress="onSenderPress"
+					iconPress="onIconPress" iconDensityAware="false" timestamp="{myView>DateTime}" text="{myView>Message}" convertLinksToAnchorTags="All"/>
+			</List>
+		</content>
+		<FeedInput post="onPost" icon="test-resources/sap/m/images/dronning_victoria.jpg" class="sapUiSmallMarginTopBottom"/>
+		<buttons>
+			<Button  text="Close" press="onclose"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,104 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:u="sap.ui.unified"
+	xmlns:l="sap.ui.layout" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+	xmlns:viz.data="sap.viz.ui5.data" xmlns:core="sap.ui.core" controllerName="Cloud.controller.Home" class="viewPadding">
+	<Page showHeader="false" showNavButton="false" class="home" floatingFooter="true">
+		<content>
+			<Page id="sideContentContainer" showHeader="true" showNavButton="false" class="main" backgroundDesign="Transparent">
+				<headerContent>
+					<Bar>
+						<contentLeft>
+							<Button type="Transparent" press="handleToggleClick" id="toggleButton" icon="sap-icon://menu2" visible="{= ${device>/system/phone} }"></Button>
+						</contentLeft>
+					</Bar>
+				</headerContent>
+				<l:DynamicSideContent id="DynamicSideContent" class="sapUiDSCExplored sapUiContentPadding" sideContentFallDown="BelowM"
+					containerQuery="true" breakpointChanged="updateToggleButtonState" showSideContent="false">
+					<l:mainContent class="main">
+						<l:VerticalLayout class="vlay">
+							<l:content>
+								<GenericTile frameType="TwoByOne" state="Loaded" class="mainTile" press="goToAssembly">
+									<tileContent>
+										<TileContent footer="{stat>/0/New} New Triggers, {stat>/0/Taken} Takenover Triggers" frameType="TwoByOne" class="newsTile">
+											<content>
+												<NewsContent contentText="Cloud Patch Assembly" subheader="Trigger and Monitor Assembly"/>
+											</content>
+										</TileContent>
+									</tileContent>
+								</GenericTile>
+							</l:content>
+						</l:VerticalLayout>
+						<html:hr/>
+						<Panel backgroundDesign="Transparent">
+							<headerToolbar>
+								<Toolbar height="2rem">
+									<Title text="Hotliners"/>
+									<ToolbarSpacer></ToolbarSpacer>
+									<!--<Button text="Details" press="goHotline" type="Default"/>-->
+								</Toolbar>
+							</headerToolbar>
+							<content>
+								<l:VerticalLayout class="vlay">
+									<l:content>
+										<IconTabBar id="idIconTabBarNoIcons" expanded="{device>/isNoPhone}" class="sapUiResponsiveContentPadding">
+											<items>
+												<IconTabFilter text="Cloud">
+													<VBox id="hotliner_today_cloud">
+														<StandardListItem title="{todayH>/0/HOTLINER_IN_BLR}" description="{i18n>primary}" icon="{imageModel>/path}/images/india.png"
+															iconDensityAware="false" iconInset="false" type="Active" detailPress="openChatBlr" highlight="Success"/>
+														<StandardListItem title="{todayH>/0/BLR_BACKUP}" description="{i18n>backup}" icon="{imageModel>/path}/images/india.png"
+															iconDensityAware="false" iconInset="false" type="Active" detailPress="openChatBlrBackup" highlight="Warning"/>
+														<StandardListItem title="{todayH>/0/HOTLINER_IN_ROT}" description="{i18n>primary}" icon="{imageModel>/path}/images/germany.png"
+															iconDensityAware="false" iconInset="false" type="Active" detailPress="openChatRot" highlight="Success"/>
+														<StandardListItem title="{todayH>/0/ROT_BACKUP}" description="{i18n>backup}" icon="{imageModel>/path}/images/germany.png"
+															iconDensityAware="false" iconInset="false" type="Active" detailPress="openChatRotBackup" highlight="Warning"/>
+														<StandardListItem title="{todayH>/0/HOTLINER_IN_CAN}" description="{i18n>primary}" icon="{imageModel>/path}/images/canada.png"
+															iconDensityAware="false" iconInset="false" type="Active" detailPress="openChatVan" highlight="Success"/>
+														<StandardListItem title="{todayH>/0/HOTLINER_CAN_BACK}" description="{i18n>backup}" icon="{imageModel>/path}/images/canada.png"
+															iconDensityAware="false" iconInset="false" type="Active" detailPress="openChatVanBackup" highlight="Warning"/>
+													</VBox>
+												</IconTabFilter>
+												<IconTabFilter text="BYD">
+													<VBox id="hotliner_today_byd">
+														<StandardListItem title="{todayBYD>/0/HOTLINER_IN_BLR}" description="{i18n>primary}" icon="{imageModel>/path}/images/india.png"
+															iconDensityAware="false" iconInset="false" type="Active" detailPress="openChatBlr" highlight="Success"/>
+														<StandardListItem title="{todayBYD>/0/BLR_BACKUP}" description="{i18n>backup}" icon="{imageModel>/path}/images/india.png"
+															iconDensityAware="false" iconInset="false" type="Active" detailPress="openChatBlrBackup" highlight="Warning"/>
+														<StandardListItem title="{todayBYD>/0/HOTLINER_IN_ROT}" description="{i18n>primary}" icon="{imageModel>/path}/images/germany.png"
+															iconDensityAware="false" iconInset="false" type="Active" detailPress="openChatRot" highlight="Success"/>
+														<StandardListItem title="{todayBYD>/0/ROT_BACKUP}" description="{i18n>backup}" icon="{imageModel>/path}/images/germany.png"
+															iconDensityAware="false" iconInset="false" type="Active" detailPress="openChatRotBackup" highlight="Warning"/>
+														<StandardListItem title="{todayBYD>/0/HOTLINER_IN_CAN}" description="{i18n>primary}" icon="{imageModel>/path}/images/canada.png"
+															iconDensityAware="false" iconInset="false" type="Active" detailPress="openChatVan" highlight="Success"/>
+														<StandardListItem title="{todayBYD>/0/HOTLINER_CAN_BACK}" description="{i18n>backup}" icon="{imageModel>/path}/images/canada.png"
+															iconDensityAware="false" iconInset="false" type="Active" detailPress="openChatVanBackup" highlight="Warning"/>
+													</VBox>
+												</IconTabFilter>
+											</items>
+										</IconTabBar>
+									</l:content>
+								</l:VerticalLayout>
+							</content>
+						</Panel>
+					</l:mainContent>
+					<l:sideContent class="side">
+						<mvc:XMLView viewName="Cloud.view.SideContent" visible="{= ${device>/system/phone} }"/>
+					</l:sideContent>
+				</l:DynamicSideContent>
+			</Page>
+		</content>
+		<footer>
+			<Bar visible="{= !${device>/system/phone} }">
+				<contentLeft></contentLeft>
+				<contentMiddle>
+					<Button class="btn" type="Emphasized" text="{i18n>hotlineTitle}" width="auto" icon="sap-icon://headset" press="goHotline"/>
+					<Button id="notifBtn" class="btn" type="Emphasized" text="{i18n>notifyPageTitle} ({notifsCount>/count})" width="auto"
+						icon="sap-icon://notification-2" press="onPressNotifications"/>
+				</contentMiddle>
+				<contentRight>
+					<Button class="btn" type="Transparent" text="{i18n>about}" width="auto" press="openAbout"/>
+					<Button class="btn" type="Transparent" text="{i18n>help}" width="auto" press="openHelp"/>
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>

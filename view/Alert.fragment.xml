@@ -1,0 +1,19 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Notifications" stretch="{= ${device>/system/phone} }">
+		<content>
+			<Button width="100%" type="Transparent" text="Clear All" press="clearAll" icon="sap-icon://delete"/>
+			<List items="{msg>/results}" swipeDirection="Both">
+				<NotificationListItem title="{msg>Message}" showCloseButton="false" priority="Low"
+				datetime="{path : 'msg>Date',type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd YY' ,source :'yyyymmdd'}}, {path : 'msg>Time',type: 'sap.ui.model.type.Time', formatOptions: { pattern: 'hh:mm' ,source :'hhmmss'}} CET" >
+					<buttons>
+						<Button text="Go to Project" press="openProject" type="Transparent" icon="sap-icon://open-command-field"/>
+						<Button text="Dismiss" press="deleteNotif" type="Reject" icon="sap-icon://sys-cancel"/>
+					</buttons>
+				</NotificationListItem>
+			</List>
+		</content>
+		<buttons>
+			<Button text="Close" type="Reject" press="closeDialog"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

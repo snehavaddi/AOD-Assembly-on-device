@@ -1,0 +1,98 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:commons="sap.suite.ui.commons"
+	xmlns:u="sap.ui.unified" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="Cloud.controller.assemblyOverview">
+	<Page showHeader="false" showNavButton="false" class="home" floatingFooter="true">
+		<content>
+			<Page id="sideContentContainer" showHeader="true" showNavButton="false" class="main" backgroundDesign="Transparent">
+				<headerContent>
+					<Bar>
+						<contentRight>
+							<Button type="Transparent" press="handleToggleClick" id="toggleButton" icon="sap-icon://menu2" visible="{= ${device>/system/phone} }"></Button>
+						</contentRight>
+						<contentLeft>
+							<Button type="Transparent" press="onNavBack" icon="sap-icon://nav-back"></Button>
+						</contentLeft>
+					</Bar>
+				</headerContent>
+				<l:DynamicSideContent id="DynamicSideContent" class="sapUiDSCExplored sapUiContentPadding" sideContentFallDown="BelowM"
+					containerQuery="true" showSideContent="false">
+					<l:mainContent class="main">
+						<Title text="{/results/0/ProjectText} | {/results/0/ProjectId}" press="showProjectDetails" emphasized="true" class="projectTitle"/>
+						<Toolbar>
+							<Button text="{i18n>attr}" icon="sap-icon://display" type="Accept" press="openAttributes"/>
+							<Button text="{i18n>runPrj}" icon="sap-icon://shipping-status" type="Emphasized" press="runGroupProject"/>
+							<ToolbarSpacer></ToolbarSpacer>
+							<Button class="btn" type="Default" width="auto" press="openInfo" icon="sap-icon://legend" text=""/>
+							<Button icon="sap-icon://synchronize" type="Emphasized" press="syncProject" tooltip="Refresh {/results/0/ProjectText}"/>
+						</Toolbar>
+						<VBox id="__mainContent" items="{/results}">
+							<Panel width="100%" backgroundDesign="Solid" class="phasePanel" expandable="true" expand="onExpandPhase">
+								<headerToolbar>
+									<Toolbar height="3rem">
+										<Title text="{PhseShortText}" titleStyle="H2" class="phaseText"/><ToolbarSpacer/>
+										<Button icon="{path : 'State', formatter : '.formatter.PhaseState'}"/>
+										<Button icon="sap-icon://synchronize" type="Accept" press="syncPhase" tooltip="Refresh {PhseShortText}"/>
+									</Toolbar>
+								</headerToolbar>
+								<infoToolbar>
+									<Toolbar design="Transparent">
+										<MessageStrip type="Success" text="{Success}" showIcon="true"/>
+										<ToolbarSpacer/>
+										<MessageStrip type="Error" text="{Fail}" showIcon="true"/>
+										<ToolbarSpacer/>
+										<MessageStrip type="Warning" text="{Warning}" showIcon="true"/>
+										<ToolbarSpacer/>
+										<MessageStrip type="Information" text="{Inprocess}" showIcon="true" customIcon="sap-icon://shipping-status"/>
+									</Toolbar>
+								</infoToolbar>
+								<content>
+									<ProgressIndicator displayValue="{CompletedItems}/{TotalItems}" width="100%"
+										percentValue="{parts: ['TotalItems','CompletedItems'],formatter:'.formatter.Complete'}"
+										state="{parts: ['TotalItems','CompletedItems','Fail'],formatter:'.formatter.State'}"/>
+									<List class="sapContrast sapContrastPlus" items="{item>/results}">
+										<items>
+											<NotificationListItem title="{parts : [{path : 'item>ItemShortText'}, {path : 'item>MW_ACTION'}], formatter : '.formatter.getItemHeader'}"
+												priority="{path : 'item>Item_Status', formatter : '.formatter.ItemStatus'}" description="{item>Project_Text}"
+												authorName="{item>ItemStatusText}"
+												authorPicture="{parts : [{path : 'item>Item_Status'}, {path : 'item>MW_ACTION'}], formatter : '.formatter.ItemStatusIcon'}"
+												showCloseButton="false" class="whitebox">
+												<customData>
+													<core:CustomData
+													key="white" value="inprocess" writeToDom="{= ${item>Item_Status} === '4000' || ${item>Item_Status} === '4100'}">
+													</core:CustomData>
+												</customData>
+												<buttons>
+													<Button text="{i18n>Action}" type="Accept" class="sapUiSizeCompact" press="onPressAction" tooltip="{item>ItemShortText}"/>
+													<Button text="{i18n>detail}" type="Emphasized" press="onPressDetail" icon="sap-icon://form" class="sapUiSizeCompact"
+														tooltip="{item>ItemShortText}"/>
+												</buttons>
+											</NotificationListItem>
+										</items>
+									</List>
+								</content>
+							</Panel>
+						</VBox>
+					</l:mainContent>
+					<l:sideContent class="side">
+						<mvc:XMLView viewName="Cloud.view.SideContent" visible="{= ${device>/system/phone} }"/>
+					</l:sideContent>
+				</l:DynamicSideContent>
+			</Page>
+		</content>
+		<footer>
+			<Bar visible="{= !${device>/system/phone} }">
+				<contentLeft>
+					<Button class="btn" type="Emphasized" text="{i18n>homeTitle}" width="auto" icon="sap-icon://home" press="goHome"/>
+				</contentLeft>
+				<contentMiddle>
+					<Button class="btn" type="Emphasized" text="{i18n>hotlineTitle}" width="auto" icon="sap-icon://headset" press="goHotline"/>
+					<Button id="notifBtn" class="btn" type="Emphasized" text="{i18n>notifyPageTitle} ({notifsCount>/count})" width="auto"
+						icon="sap-icon://notification-2" press="onPressNotifications"/>
+				</contentMiddle>
+				<contentRight>
+					<Button class="btn" type="Transparent" text="{i18n>about}" width="auto" press="openAbout"/>
+					<Button class="btn" type="Transparent" text="{i18n>help}" width="auto" press="openHelp"/>
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>

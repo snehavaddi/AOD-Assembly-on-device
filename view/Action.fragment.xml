@@ -1,0 +1,9 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<ActionSheet title="{i18n>actionTitle}" showCancelButton="true" placement="Bottom">
+		<Button text="{i18n>executeBtn}" icon="sap-icon://shipping-status" press="onExecute" visible="{= ${/MW_ACTION} === 'X'}"/>
+		<Button text="{i18n>finishBtn}" icon="sap-icon://complete" press="onFinish"/>
+		<Button text="{i18n>skipBtn}" icon="sap-icon://sys-cancel" press="onSkip"/>
+		<Button text="{i18n>resetBtn}" icon="sap-icon://reset" press="onReset"/>
+		<Button text="{i18n>resetAllBtn}" icon="sap-icon://reset" press="onResetAll"/> 
+	</ActionSheet>
+</core:FragmentDefinition>

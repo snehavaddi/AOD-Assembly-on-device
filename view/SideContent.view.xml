@@ -1,0 +1,24 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="Cloud.controller.Home"
+	xmlns:html="http://www.w3.org/1999/xhtml" displayBlock="true">
+	<App>
+		<pages>
+			<Page showHeader="false" showFooter="false">
+				<content>
+					<Panel backgroundDesign="Solid" height="100%">
+						<VBox width="100%" direction="Column" alignItems="Stretch">
+							<Button class="btn" type="Emphasized" text="{i18n>homeTitle}" width="100%" icon="sap-icon://home" press="goHome"/>
+							<Button class="btn" type="Emphasized" text="{i18n>hotlineTitle}" width="100%" icon="sap-icon://headset" press="goHotline"/>
+							<Button id="notifBtn" class="btn" type="Emphasized" text="{i18n>notifyPageTitle} ({notifsCount>/count})" width="100%" icon="sap-icon://notification-2"
+								press="onPressNotifications"/>
+							<html:hr></html:hr>
+							<VBox class="bottom">
+								<Button class="btn" type="Accept" text="{i18n>about}" width="100%" press="openAbout"/>
+								<Button class="btn" type="Accept" text="{i18n>help}" width="100%" press="openHelp"/>
+							</VBox>
+						</VBox>
+					</Panel>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
