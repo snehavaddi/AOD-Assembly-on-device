@@ -1,0 +1,207 @@
+{
+	"_version": "1.1.0",
+	"sap.app": {
+		"_version": "1.1.0",
+		"id": "Cloud",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "ui5template.basicSAPUI5ApplicationProject",
+			"version": "1.32.0"
+		}
+	},
+	"sap.ui": {
+		"_version": "1.1.0",
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_bluecrystal"
+		]
+	},
+	"sap.ui5": {
+		"_version": "1.1.0",
+		"rootView": {
+			"viewName": "Cloud.view.App",
+			"type": "XML"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "Cloud.i18n.i18n"
+				}
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "Cloud.view",
+				"controlId": "app",
+				"controlAggregation": "pages",
+				"transition": "slide",
+				"bypassed": {
+					"target": "notFound"
+				}
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "appHome",
+					"target": "Home"
+				},
+				{
+					"pattern": "Home",
+					"name": "Home",
+					"target": "Home"
+				},
+				{
+					"pattern": "Assembly",
+					"name": "Assembly",
+					"target": "Assembly"
+				},
+				{
+					"pattern": "hotline",
+					"name": "hotline",
+					"target": "v3"
+				},
+				{
+					"pattern": "chart",
+					"name": "chart",
+					"target": "chart"
+				},
+				{
+					"pattern": "hotline",
+					"name": "hotline",
+					"target": "hotline"
+				},
+				{
+					"pattern": "notify",
+					"name": "notify",
+					"target": "notify"
+				},
+				{
+					"pattern": "profile",
+					"name": "profile",
+					"target": "profile"
+				},
+				{
+					"pattern": "v4",
+					"name": "v4",
+					"target": "v4"
+				},
+				{
+					"pattern": "assemblyOverview/{projectId}",
+					"name": "assemblyOverview",
+					"target": "assemblyOverview"
+				},
+				{
+					"pattern": "preparationPhase",
+					"name": "preparationPhase",
+					"target": "preparationPhase"
+				},
+				{
+					"pattern": "assemblyPhase",
+					"name": "assemblyPhase",
+					"target": "assemblyPhase"
+				},
+				{
+					"pattern": "closurePhase",
+					"name": "closurePhase",
+					"target": "closurePhase"
+				}
+			],
+			"targets": {
+				"Home": {
+					"viewName": "Home",
+					"viewLevel": 1
+				},
+				"Assembly": {
+					"viewName": "Assembly",
+					"transition": "slide"
+				},
+				"v3": {
+					"viewName": "V3",
+					"transition": "slide"
+				},
+				"v4": {
+					"viewName": "V4",
+					"transition": "slide"
+				},
+				"chart": {
+					"viewName": "chart"
+				},
+				"hotline": {
+					"viewName": "hotline"
+				},
+				"notify": {
+					"viewName": "notify"
+				},
+				"profile": {
+					"viewName": "profile"
+				},
+				"preparationPhase": {
+					"viewName": "preparationPhase"
+				},
+				"assemblyPhase": {
+					"viewName": "assemblyPhase"
+				},
+				"closurePhase": {
+					"viewName": "closurePhase"
+				},
+				"assemblyOverview": {
+					"viewName": "assemblyOverview"
+				},
+				"notFound": {
+					"viewName": "NotFound",
+					"transition": "show"
+				}
+			}
+		}
+	},
+	"sap.platform.hcp": {
+		"uri": "",
+		"_version": "1.1.0"
+	},
+	"sap.platform.abap": {
+		"uri": "/sap/bc/ui5_ui5/brlt/aod",
+		"_version": "1.1.0"
+	}
+}
